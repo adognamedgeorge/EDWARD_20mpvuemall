@@ -1,0 +1,10 @@
+// 定义函数 rpx
+@function rpx($value) {
+  @return $value * 1rpx
+}
+
+@mixin img($radius) {
+  width: 100%;
+  height: 100%;
+  border-radius: $radius;
+}

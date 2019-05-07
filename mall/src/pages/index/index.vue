@@ -1,6 +1,10 @@
 <template>
   <div @click="clickHandle">
 
+    <div>
+      <home-search></home-search>
+    </div>
+
     <div class="userinfo" @click="bindViewTap">
       <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
       <img class="userinfo-avatar" src="/static/images/user.png" background-size="cover" />
@@ -22,7 +26,7 @@
       <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
     </form>
 
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
+    <a href="/pages/counter/index" class="counter">去往Vuex示例页面</a>
 
     <div class="all">
         <div class="left">
@@ -35,7 +39,7 @@
 
 <script>
 import card from '@/components/card'
-
+import homeSearch from '@/components/search'
 export default {
   data () {
     return {
@@ -48,12 +52,13 @@ export default {
   },
 
   components: {
-    card
+    card,
+    homeSearch
   },
 
   methods: {
     bindViewTap () {
-      const url = '../logs/main'
+      const url = '../logs/index'
       if (mpvuePlatform === 'wx') {
         mpvue.switchTab({ url })
       } else {

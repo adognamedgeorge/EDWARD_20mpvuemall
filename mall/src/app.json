@@ -1,8 +1,24 @@
 {
   "pages": [
-    "pages/index/main",
-    "pages/logs/main",
-    "pages/counter/main"
+    {
+      "path": "pages/index/index",
+      "config": {
+        "navigationBarTitleText": "首页",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/logs/index",
+      "config": {
+        "navigationBarTitleText": "日志"
+      }
+    },
+    {
+      "path": "pages/counter/index",
+      "config": {
+        "navigationBatTitleText": "VUEX"
+      }
+    }
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -17,25 +33,25 @@
     "borderStyle": "white",
 
     "list": [{
-      "text": "首页",
-      "pagePath": "pages/index/main",
+      "text": "首页list",
+      "pagePath": "pages/index/index",
       "iconPath": "static/tabs/home.png",
       "selectedIconPath": "static/tabs/home-active.png"
     }, {
-      "text": "订单",
-      "pagePath": "pages/logs/main",
+      "text": "订单list",
+      "pagePath": "pages/logs/index",
       "iconPath": "static/tabs/orders.png",
       "selectedIconPath": "static/tabs/orders-active.png"
     }],
 
     "items": [{
-      "name": "首页",
-      "pagePath": "pages/index/main",
+      "name": "首页items",
+      "pagePath": "pages/index/index",
       "icon": "static/tabs/home.png",
       "activeIcon": "static/tabs/home-active.png"
     }, {
-      "name": "订单",
-      "pagePath": "pages/logs/main",
+      "name": "订单items",
+      "pagePath": "pages/logs/index",
       "icon": "static/tabs/orders.png",
       "activeIcon": "static/tabs/orders-active.png"
     }],
