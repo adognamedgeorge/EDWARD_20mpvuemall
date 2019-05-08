@@ -14,6 +14,7 @@
       <div class="iconRt">
         <i class="iconfont">&#xe61b;</i>
         <p>购物车</p>
+        <span>{{count}}</span>
       </div>
     </div>
     <div>
@@ -24,10 +25,23 @@
 
 <script>
 import homeHead from './head'
+import store from '@/pages/counter/store'
 export default {
   name: 'homeSearch',
   components: {
     homeHead
+  },
+  computed: {
+    count () {
+      let num = store.state.count
+      if (num < 0) {
+        return 0
+      } else if (num > 99) {
+        return 99 + '+'
+      } else {
+        return num
+      }
+    }
   },
   data () {
     return {
@@ -50,8 +64,21 @@ export default {
   .iconLf, .iconRt {
     width: 20%;
     flex-direction: column;
-    font-size: .2rem;
-    color: #7c801c;
+    font-size: .3rem;
+    color: #262626;
+  }
+  .iconRt {
+    position: relative;
+    span {
+      background-color: red;
+      position: absolute;
+      left: 50%;
+      top: rpx(-5);
+      display: inline-block;
+      border-radius: 100%;
+      padding: 0 rpx(10);
+      font-size: .2rem;
+    }
   }
   .inSearch {
     flex: 1;

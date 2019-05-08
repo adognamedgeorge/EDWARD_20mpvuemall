@@ -7,6 +7,8 @@
 
     <div class="homeSlide">
       <home-slide></home-slide>
+      <home-nav></home-nav>
+      <home-main></home-main>
     </div>
 
     <div class="userinfo" @click="bindViewTap">
@@ -48,10 +50,13 @@
 </template>
 
 <script>
+import store from '../counter/store'
 import card from '@/components/card'
 import homeSearch from '@/components/search'
 import homeLeft from '@/components/left'
 import homeSlide from '@/components/slide'
+import homeNav from '@/components/nav'
+import homeMain from '@/components/main'
 export default {
   data () {
     return {
@@ -63,11 +68,18 @@ export default {
       leftShow: false
     }
   },
+  computed: {
+    count () {
+      return store.state.count
+    }
+  },
   components: {
     card,
     homeSearch,
     homeLeft,
-    homeSlide
+    homeSlide,
+    homeNav,
+    homeMain
   },
 
   methods: {
