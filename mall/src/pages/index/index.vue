@@ -1,8 +1,12 @@
 <template>
   <div @click="clickHandle">
 
-    <div>
-      <home-search></home-search>
+    <div class="homeSearch">
+      <home-search v-on:val="val"></home-search>
+    </div>
+
+    <div class="homeSlide">
+      <home-slide></home-slide>
     </div>
 
     <div class="userinfo" @click="bindViewTap">
@@ -34,12 +38,20 @@
         <div class="right">
         </div>
     </div>
+
+    <div class="homeLeft" v-show="leftShow">
+      <home-left></home-left>
+    </div>
+
+    <div class="mask" v-if="leftShow" @click="showMask"></div>
   </div>
 </template>
 
 <script>
 import card from '@/components/card'
 import homeSearch from '@/components/search'
+import homeLeft from '@/components/left'
+import homeSlide from '@/components/slide'
 export default {
   data () {
     return {
@@ -47,16 +59,24 @@ export default {
       userInfo: {
         nickName: 'mpvue',
         avatarUrl: 'http://mpvue.com/assets/logo.png'
-      }
+      },
+      leftShow: false
     }
   },
-
   components: {
     card,
-    homeSearch
+    homeSearch,
+    homeLeft,
+    homeSlide
   },
 
   methods: {
+    val (childVal) {
+      this.leftShow = childVal
+    },
+    showMask () {
+      this.leftShow = false
+    },
     bindViewTap () {
       const url = '../logs/index'
       if (mpvuePlatform === 'wx') {
@@ -77,7 +97,35 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.homeSearch {
+  position: fixed;
+  height: rpx(170);
+  top: 0;
+  left: 0;
+  z-index: 9;
+  bottom: 0;
+  right: 0;
+}
+.homeSlide {
+  margin-top: rpx(170);
+}
+.homeLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.counter {
+  position: relative;
+}
+.mask {
+  position: fixed;
+  background-color: rgba(128, 128, 128, .5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
 .userinfo {
   display: flex;
   flex-direction: column;

@@ -16,22 +16,29 @@
         <p>购物车</p>
       </div>
     </div>
+    <div>
+      <home-head></home-head>
+    </div>
   </div>
 </template>
 
 <script>
+import homeHead from './head'
 export default {
-  name: 'homeSearch'
-  // data () {
-  //   return {
-  //     childVal: true
-  //   }
-  // },
-  // methods: {
-  //   leftShow () {
-  //     this.$emit('val', this.childVal)
-  //   }
-  // }
+  name: 'homeSearch',
+  components: {
+    homeHead
+  },
+  data () {
+    return {
+      childVal: true
+    }
+  },
+  methods: {
+    leftShow () {
+      this.$emit('val', this.childVal)
+    }
+  }
 }
 </script>
 
