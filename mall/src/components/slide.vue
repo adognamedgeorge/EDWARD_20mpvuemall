@@ -33,7 +33,7 @@ export default {
     height: rpx(300);
     border-radius: rpx(20);
     img {
-      @include img(rpx(20))
+      @include img(rpx(20));
     }
   }
 }

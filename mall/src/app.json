@@ -8,10 +8,10 @@
       }
     },
     {
-      "path": "pages/logs/index",
-      "config": {
-        "navigationBarTitleText": "日志"
-      }
+      "path": "pages/logs/index"
+    },
+    {
+      "path": "pages/detail/detail"
     },
     {
       "path": "pages/counter/index",
@@ -36,7 +36,7 @@
     "color": "#999",
     "backgroundColor": "#fafafa",
     "selectedColor": "#333",
-    "borderStyle": "white",
+    "borderStyle": "black",
 
     "list": [{
       "text": "首页list",
@@ -48,6 +48,9 @@
       "pagePath": "pages/logs/index",
       "iconPath": "static/tabs/orders.png",
       "selectedIconPath": "static/tabs/orders-active.png"
+    }, {
+      "text": "详情页list",
+      "pagePath": "pages/detail/detail"
     }, {
       "text": "我的list",
       "pagePath": "pages/login/login",
