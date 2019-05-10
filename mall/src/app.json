@@ -24,6 +24,12 @@
       "config": {
         "navigationBarTitleText": "登陆"
       }
+    },
+    {
+      "path": "pages/cart/cart",
+      "config": {
+        "navigationBarTitleText": "购物车cart"
+      }
     }
   ],
   "window": {
@@ -56,6 +62,9 @@
       "pagePath": "pages/login/login",
       "iconPath": "static/tabs/mine.png",
       "selectedIconPath": "static/tabs/mine_active.png"
+    }, {
+      "text": "购物车list",
+      "pagePath": "pages/cart/cart"
     }],
 
     "items": [{
