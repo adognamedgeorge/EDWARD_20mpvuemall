@@ -1,5 +1,10 @@
 exports.install = function (Vue, options) {
-  Vue.prototype.goToFuck = () => {
-    console.log('fuck')
+  Vue.prototype.bindToCart = () => {
+    const url = '../cart/cart'
+    if (mpvuePlatform === 'wx') {
+      mpvue.switchTab({ url })
+    } else {
+      mpvue.navigateTo({ url })
+    }
   }
 }

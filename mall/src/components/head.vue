@@ -2,7 +2,7 @@
   <div class="outerWrap">
     <div class="homeHead">
       <ul>
-        <li v-for="(item, index) of sortList" :key="index">
+        <li v-for="(item, index) of sortList" :key="index" @click="getGoods(item['name'])">
           {{item['name']}}
         </li>
       </ul>
@@ -11,21 +11,23 @@
 </template>
 
 <script>
+// 定义公共组件非父子组件传值
 import Link from '../js/link.js'
 export default {
   name: 'homeHead',
   data () {
     return {
-      sortList: []
+      sortList: [],
+      goodsList: []
     }
   },
   methods: {
+    // 获取类目名称
     getSorts () {
       let Fly = require('flyio')
       let fly = new Fly()
       fly.get('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getTopCat')
         .then((res) => {
-          console.log(res)
           const re = res.data
           this.sortList = re.data
           this.postSorts(this.sortList)
@@ -34,6 +36,34 @@ export default {
           console.log(err)
         })
     },
+    // 通过类目名称获取商品列表页并跳转
+    getGoods (name) {
+      let Fly = require('flyio')
+      let fly = new Fly()
+      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getCatByName', {
+        goodsName: name
+      })
+        .then((res) => {
+          console.log(res)
+          const result = res.data
+          this.goodsList = result.data
+          this.postSorts(this.goodsList)
+          this.bindToCategory()
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 跳转到类目列表页
+    bindToCategory () {
+      const url = '../category/index'
+      if (mpvuePlatform === 'wx') {
+        mpvue.switchTab({ url })
+      } else {
+        mpvue.navigateTo({ url })
+      }
+    },
+    // 向固定侧栏传值
     postSorts (a) {
       Link.$emit('val', a)
     }

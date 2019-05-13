@@ -11,7 +11,7 @@
           <input type="text" placeholder="请输入搜索关键词" />
         </div>
       </div>
-      <div class="iconRt">
+      <div class="iconRt" @click="bindToCart">
         <i class="iconfont">&#xe61b;</i>
         <p>购物车</p>
         <span>{{count}}</span>

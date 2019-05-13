@@ -37,10 +37,10 @@
       <button>立即购买</button>
     </div>
 
-    <div class="fixBtn">
+    <div class="fixBtn" @click="bindToCart">
       <button>&lsaquo;</button>
       <div>
-        <button class="lastBtn iconfont" @click="bindToCart">&#xe61b;</button>
+        <button class="lastBtn iconfont">&#xe61b;</button>
         <span>{{count}}</span>
       </div>
     </div>
@@ -81,15 +81,6 @@ export default {
         .catch(err => {
           console.log(err)
         })
-    },
-    bindToCart () {
-      const url = '../cart/cart'
-      if (mpvuePlatform === 'wx') {
-        mpvue.switchTab({ url })
-      } else {
-        mpvue.navigateTo({ url })
-      }
-      this.goToFuck()
     }
   }
 }

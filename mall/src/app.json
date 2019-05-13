@@ -30,13 +30,17 @@
       "config": {
         "navigationBarTitleText": "购物车cart"
       }
+    },
+    {
+      "path": "pages/category/index"
     }
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#ccc",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#D3D3D3"
   },
   "tabBar": {
     "color": "#999",
@@ -63,8 +67,8 @@
       "iconPath": "static/tabs/mine.png",
       "selectedIconPath": "static/tabs/mine_active.png"
     }, {
-      "text": "购物车list",
-      "pagePath": "pages/cart/cart"
+      "text": "列表页list",
+      "pagePath": "pages/category/index"
     }],
 
     "items": [{
