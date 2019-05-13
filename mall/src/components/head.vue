@@ -56,12 +56,13 @@ export default {
     },
     // 跳转到类目列表页
     bindToCategory () {
-      const url = '../category/index'
-      if (mpvuePlatform === 'wx') {
-        mpvue.switchTab({ url })
-      } else {
-        mpvue.navigateTo({ url })
-      }
+      // const url = '../category/index'
+      // if (mpvuePlatform === 'wx') {
+      //   mpvue.switchTab({ url })
+      // } else {
+      //   mpvue.navigateTo({ url })
+      // }
+      this.$router.push('/pages/category/index')
     },
     // 向固定侧栏传值
     postSorts (a) {

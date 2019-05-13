@@ -67,8 +67,8 @@
       "iconPath": "static/tabs/mine.png",
       "selectedIconPath": "static/tabs/mine_active.png"
     }, {
-      "text": "列表页list",
-      "pagePath": "pages/category/index"
+      "text": "购物车list",
+      "pagePath": "pages/cart/cart"
     }],
 
     "items": [{
