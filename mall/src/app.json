@@ -28,11 +28,17 @@
     {
       "path": "pages/cart/cart",
       "config": {
-        "navigationBarTitleText": "购物车cart"
+        "navigationBarTitleText": "购物车cart",
+        "enablePullDownRefresh": true
       }
     },
     {
-      "path": "pages/category/index"
+      "path": "pages/category/index",
+      "config": {
+        "backgroundColor": "light",
+        "navigationBarTitleText": "商品列表",
+        "navigationBarBackgroundColor": "#F5E141"
+      }
     }
   ],
   "window": {
@@ -40,13 +46,13 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#D3D3D3"
+    "backgroundColor": "#F5E141"
   },
   "tabBar": {
     "color": "#999",
     "backgroundColor": "#fafafa",
     "selectedColor": "#333",
-    "borderStyle": "black",
+    "borderStyle": "white",
 
     "list": [{
       "text": "首页list",

@@ -2,7 +2,7 @@
   <div class="outerWrap">
     <div class="homeHead">
       <ul>
-        <li v-for="(item, index) of sortList" :key="index" @click="getGoods(item['name'])">
+        <li v-for="(item, index) of sortList" :key="index" @click="getGoods(item['name'])" :class="{selected: item.isSelected}">
           {{item['name']}}
         </li>
       </ul>
@@ -18,7 +18,8 @@ export default {
   data () {
     return {
       sortList: [],
-      goodsList: []
+      goodsList: [],
+      isSelected: false
     }
   },
   methods: {
@@ -53,6 +54,14 @@ export default {
         .catch(err => {
           console.log(err)
         })
+
+      for (let k in this.sortList) {
+        this.sortList[k].isSelected = false
+        if (this.sortList[k]['name'] === name) {
+          this.sortList[k].isSelected = true
+          console.log(this.sortList[k]['name'])
+        }
+      }
     },
     // 跳转到类目列表页
     bindToCategory () {
@@ -100,5 +109,8 @@ export default {
 .outerWrap {
   height: rpx(60);
   overflow: hidden;
+}
+.selected {
+  color: red;
 }
 </style>

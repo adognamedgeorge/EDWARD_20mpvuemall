@@ -1,23 +1,32 @@
 <template>
   <div id="box">
-    <div class="flexRow">
-      <div v-for="(item, index) of goodsList" :key="index">
-        <img :src="item" alt="">
-      </div>
+    <div>
+      <home-search></home-search>
     </div>
-    <div class="noGoods" v-if="goodsList.length === 0">
-      <div>noGooooooooods</div>
+    <div class="content">
+      <div class="flexRow">
+        <div v-for="(item, index) of goodsList" :key="index">
+          <img :src="item" alt="">
+        </div>
+      </div>
+      <div class="noGoods" v-if="goodsList.length === 0">
+        <div>noGooooooooods</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Link from '../../js/link.js'
+import homeSearch from '@/components/search'
 export default {
   data () {
     return {
       goodsList: []
     }
+  },
+  components: {
+    homeSearch
   },
   mounted () {
     const vm = this
@@ -30,7 +39,6 @@ export default {
 
 <style scoped lang="scss">
 #box {
-  padding: rpx(20);
   .flexRow {
     display: flex;
     flex-wrap: wrap;
@@ -50,4 +58,11 @@ export default {
     }
   }
 }
+  .content {
+    padding: rpx(20) rpx(20) 50%;
+    background: -webkit-linear-gradient(left top, #d39203, blue);
+    background: -o-linear-gradient(left top, #d39203, blue);
+    background: -moz-linear-gradient(left top, #d39203, blue);
+    background: linear-gradient(left top, #d39203, blue);
+  }
 </style>
