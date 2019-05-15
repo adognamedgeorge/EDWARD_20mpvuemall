@@ -3,12 +3,15 @@
 
     <div class="homeSearch">
       <home-search v-on:val="val"></home-search>
+      <div @click="bindToCategory">
+        <home-head></home-head>
+      </div>
     </div>
 
     <div class="homeSlide">
-      <home-slide></home-slide>
+      <home-slide v-bind:pList="posterList"></home-slide>
       <home-nav></home-nav>
-      <home-main></home-main>
+      <home-main :newCat="newCat" :secCat="secCat"></home-main>
     </div>
 
     <div class="userinfo" @click="bindViewTap">
@@ -57,6 +60,7 @@ import homeLeft from '@/components/left'
 import homeSlide from '@/components/slide'
 import homeNav from '@/components/nav'
 import homeMain from '@/components/main'
+import homeHead from '@/components/head'
 export default {
   data () {
     return {
@@ -65,7 +69,11 @@ export default {
         nickName: 'mpvue',
         avatarUrl: 'http://mpvue.com/assets/logo.png'
       },
-      leftShow: false
+      leftShow: false,
+      posterList: [],
+      catList: [],
+      newCat: [],
+      secCat: []
     }
   },
   computed: {
@@ -76,6 +84,7 @@ export default {
   components: {
     card,
     homeSearch,
+    homeHead,
     homeLeft,
     homeSlide,
     homeNav,
@@ -100,7 +109,31 @@ export default {
     clickHandle (ev) {
       console.log('clickHandle:', ev)
       // throw {message: 'custom test'}
+    },
+    // 跳转到商品类目页
+    bindToCategory () {
+      this.$router.push('/pages/category/index')
+    },
+    // 获取首页海报数据
+    getPoster () {
+      let Fly = require('flyio')
+      let fly = Fly()
+      fly.get('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getHomePic')
+        .then(res => {
+          const re = res.data
+          this.posterList = re.data['posterList']
+          this.catList = re.data['catList']
+          this.newCat = re.data['catList'].slice(0, 3)
+          this.secCat = re.data['catList'].slice(2)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
+  },
+
+  mounted () {
+    this.getPoster()
   },
 
   created () {

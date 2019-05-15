@@ -17,9 +17,6 @@
         <span>{{count}}</span>
       </div>
     </div>
-    <div>
-      <home-head></home-head>
-    </div>
   </div>
 </template>
 

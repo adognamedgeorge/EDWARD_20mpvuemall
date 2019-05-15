@@ -45,21 +45,17 @@ export default {
         goodsName: name
       })
         .then((res) => {
-          console.log(res)
           const result = res.data
           this.goodsList = result.data
           this.postSorts(this.goodsList)
-          this.bindToCategory()
         })
         .catch(err => {
           console.log(err)
         })
-
       for (let k in this.sortList) {
         this.sortList[k].isSelected = false
         if (this.sortList[k]['name'] === name) {
           this.sortList[k].isSelected = true
-          console.log(this.sortList[k]['name'])
         }
       }
     },

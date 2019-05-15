@@ -2,6 +2,7 @@
   <div id="box">
     <div>
       <home-search></home-search>
+      <home-head></home-head>
     </div>
     <div class="content">
       <div class="flexRow">
@@ -9,7 +10,7 @@
           <img :src="item" alt="">
         </div>
       </div>
-      <div class="noGoods" v-if="goodsList.length === 0">
+      <div class="noGoods" v-show="goodsList === false">
         <div>noGooooooooods</div>
       </div>
     </div>
@@ -19,6 +20,7 @@
 <script>
 import Link from '../../js/link.js'
 import homeSearch from '@/components/search'
+import homeHead from '@/components/head'
 export default {
   data () {
     return {
@@ -26,7 +28,8 @@ export default {
     }
   },
   components: {
-    homeSearch
+    homeSearch,
+    homeHead
   },
   mounted () {
     const vm = this

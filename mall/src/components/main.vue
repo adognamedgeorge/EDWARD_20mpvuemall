@@ -1,13 +1,13 @@
 <template>
   <div id="box">
     <div class="flexColumn">
-      <div v-for="(item, index) in categoryList" :key="index">
-        <img :src="item.url" alt="">
+      <div v-for="(item, index) in newCat" :key="index">
+        <img :src="item" alt="">
       </div>
     </div>
     <div class="flexRow">
-      <div v-for="(item, index) of newCategory" :key="index">
-        <img :src="item.url" alt="">
+      <div v-for="(item, index) of secCat" :key="index">
+        <img :src="item" alt="">
       </div>
     </div>
   </div>
@@ -16,6 +16,10 @@
 <script>
 export default {
   name: 'homeMain',
+  props: {
+    newCat: Array,
+    secCat: Array
+  },
   data () {
     return {
       categoryList: [

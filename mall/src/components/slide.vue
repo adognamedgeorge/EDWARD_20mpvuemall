@@ -1,9 +1,9 @@
 <template>
   <div class="divSlide">
     <swiper class="homeSwiper" indicator-dots="true" autoplay="true" interval="2000" duration="1000" circular="true">
-      <block v-for="(item, index) in banner" :key="index">
+      <block v-for="(item, index) in pList" :key="index">
         <swiper-item>
-          <img :src="item.url" class="slide-image"/>
+          <img :src="item" class="slide-image"/>
         </swiper-item>
       </block>
     </swiper>
@@ -13,6 +13,9 @@
 <script>
 export default {
   name: 'homeSlide',
+  props: {
+    pList: Array
+  },
   data () {
     return {
       banner: [
@@ -32,6 +35,7 @@ export default {
   .homeSwiper {
     height: rpx(300);
     border-radius: rpx(20);
+    border: 1px solid lightgrey;
     img {
       @include img(rpx(20));
     }
