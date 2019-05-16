@@ -6,8 +6,8 @@
     </div>
     <div class="content">
       <div class="flexRow">
-        <div v-for="(item, index) of goodsList" :key="index">
-          <img :src="item" alt="">
+        <div v-for="(item, index) of goodsList" :key="index" @click="bindToDetail">
+          <img :src="item.url" alt="">
         </div>
       </div>
       <div class="noGoods" v-show="goodsList === false">
@@ -30,6 +30,11 @@ export default {
   components: {
     homeSearch,
     homeHead
+  },
+  methods: {
+    bindToDetail () {
+      this.$router.push({ path: '/pages/detail/detail', query: { id: 1 } })
+    }
   },
   mounted () {
     const vm = this
@@ -62,7 +67,7 @@ export default {
   }
 }
   .content {
-    padding: rpx(20) rpx(20) 50%;
+    padding: rpx(20) rpx(20) 100%;
     background: -webkit-linear-gradient(left top, #d39203, blue);
     background: -o-linear-gradient(left top, #d39203, blue);
     background: -moz-linear-gradient(left top, #d39203, blue);

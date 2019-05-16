@@ -45,8 +45,9 @@ export default {
         goodsName: name
       })
         .then((res) => {
-          const result = res.data
-          this.goodsList = result.data
+          const result = res.data['data']
+          console.log(result)
+          this.goodsList = result
           this.postSorts(this.goodsList)
         })
         .catch(err => {

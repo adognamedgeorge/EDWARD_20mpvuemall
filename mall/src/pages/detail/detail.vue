@@ -3,18 +3,18 @@
 
     <div class="divSlide">
       <swiper class="detailSwiper" indicator-dots="true" autoplay="true" interval="6000" duration="1000" circular="true">
-        <block v-for="(item, index) in banner" :key="index">
+        <block v-for="(item, index) in bannerList" :key="index">
           <swiper-item>
-            <img :src="item.url" alt="" class="slide-image" />
+            <img :src="item" alt="" class="slide-image" />
           </swiper-item>
         </block>
       </swiper>
     </div>
 
     <div class="detailText">
-      <h4 @click="getDetail">【现挖】临安天目小香薯5斤黄心特小小红薯新鲜番薯地瓜山芋蔬菜</h4>
+      <h4 @click="getDetail">{{ title }}</h4>
       <p class="firstP">
-        <span>￥ 36.00</span>
+        <span>￥ {{price / 100}}</span>
         <span class="lastSpan">奖励金: ￥ 1.00</span>
       </p>
       <p>快递费: 订单不满20元,收运费5元</p>
@@ -53,12 +53,9 @@ export default {
   name: 'detail',
   data () {
     return {
-      banner: [
-        { url: 'https://goss.veer.com/creative/vcg/veer/612/veer-134669323.jpg' },
-        { url: 'https://goss2.veer.com/creative/vcg/veer/612/veer-133071017.jpg' },
-        { url: 'https://goss.veer.com/creative/vcg/veer/612/veer-147395960.jpg' },
-        { url: 'https://goss4.veer.com/creative/vcg/veer/612/veer-161959036.jpg' }
-      ]
+      bannerList: [],
+      title: '',
+      price: ''
     }
   },
   computed: {
@@ -70,18 +67,22 @@ export default {
     getDetail () {
       let Fly = require('flyio')
       let fly = Fly()
-      fly.post('https://easy-mock.com/mock/5c9edbfc8aaa6f3254a8831a/yunmayi/getGoodsListByCid', {
-        goodsName: '大米',
-        page: 2,
-        pageSize: 2
+      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getDetails', {
+        cid: 1001
       })
         .then((res) => {
-          console.log(res)
+          const re = res.data
+          this.bannerList = re.data['urls']
+          this.title = re.data['title']
+          this.price = re['data']['price']
         })
         .catch(err => {
           console.log(err)
         })
     }
+  },
+  mounted () {
+    this.getDetail()
   }
 }
 </script>

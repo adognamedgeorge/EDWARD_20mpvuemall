@@ -65,9 +65,6 @@
       "iconPath": "static/tabs/orders.png",
       "selectedIconPath": "static/tabs/orders-active.png"
     }, {
-      "text": "详情页list",
-      "pagePath": "pages/detail/detail"
-    }, {
       "text": "我的list",
       "pagePath": "pages/login/login",
       "iconPath": "static/tabs/mine.png",
