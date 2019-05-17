@@ -14,7 +14,7 @@
     <div class="detailText">
       <h4 @click="getDetail">{{ title }}</h4>
       <p class="firstP">
-        <span>￥ {{price / 100}}</span>
+        <span>￥ {{ price }}</span>
         <span class="lastSpan">奖励金: ￥ 1.00</span>
       </p>
       <p>快递费: 订单不满20元,收运费5元</p>
@@ -55,7 +55,8 @@ export default {
     return {
       bannerList: [],
       title: '',
-      price: ''
+      price: '',
+      cid: ''
     }
   },
   computed: {
@@ -68,21 +69,27 @@ export default {
       let Fly = require('flyio')
       let fly = Fly()
       fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getDetails', {
-        cid: 1001
+        cid: this.cid
       })
         .then((res) => {
           const re = res.data
           this.bannerList = re.data['urls']
           this.title = re.data['title']
-          this.price = re['data']['price']
+          this.price = (re['data']['price'] / 100).toFixed(2)
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    // 获取category页面跳转参数
+    getQuery () {
+      this.cid = this.$root.$mp.query['cid']
+      console.log(this.cid)
     }
   },
   mounted () {
     this.getDetail()
+    this.getQuery()
   }
 }
 </script>

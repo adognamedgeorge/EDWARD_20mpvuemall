@@ -6,7 +6,7 @@
     </div>
     <div class="content">
       <div class="flexRow">
-        <div v-for="(item, index) of goodsList" :key="index" @click="bindToDetail">
+        <div v-for="(item, index) of goodsList" :key="index" @click="bindToDetail(item.cid)">
           <img :src="item.url" alt="">
         </div>
       </div>
@@ -32,8 +32,9 @@ export default {
     homeHead
   },
   methods: {
-    bindToDetail () {
-      this.$router.push({ path: '/pages/detail/detail', query: { id: 1 } })
+    // 跳转detail页面传参
+    bindToDetail (a) {
+      this.$router.push({ path: '/pages/detail/detail', query: { cid: a } })
     }
   },
   mounted () {

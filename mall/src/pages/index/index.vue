@@ -112,7 +112,7 @@ export default {
     },
     // 跳转到商品类目页
     bindToCategory () {
-      this.$router.push('/pages/category/index')
+      this.$router.push({path: '/pages/category/index', query: {id: 1}})
     },
     // 获取首页海报数据
     getPoster () {
