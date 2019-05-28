@@ -3,8 +3,8 @@
 
     <div class="homeSearch">
       <home-search v-on:val="val"></home-search>
-      <div @click="bindToCategory">
-        <home-head></home-head>
+      <div>
+        <home-head v-on:headVal="bindToCategory"></home-head>
       </div>
     </div>
 
@@ -111,8 +111,8 @@ export default {
       // throw {message: 'custom test'}
     },
     // 跳转到商品类目页
-    bindToCategory () {
-      this.$router.push({path: '/pages/category/index', query: {id: 1}})
+    bindToCategory (data) {
+      this.$router.push({ path: '/pages/category/index', query: { id: data } })
     },
     // 获取首页海报数据
     getPoster () {

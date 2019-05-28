@@ -2,7 +2,7 @@
   <div id="box">
     <div>
       <home-search></home-search>
-      <home-head></home-head>
+      <home-head v-on:headVal="getGoods"></home-head>
     </div>
     <div class="content">
       <div class="flexRow">
@@ -24,7 +24,8 @@ import homeHead from '@/components/head'
 export default {
   data () {
     return {
-      goodsList: []
+      goodsList: [],
+      id: ''
     }
   },
   components: {
@@ -32,9 +33,56 @@ export default {
     homeHead
   },
   methods: {
+    // 通过类目名称获取商品列表
+    getGoods (headId) {
+      // for (let k in this.sortList) {
+      //   this.sortList[k].isSelected = false
+      //   if (this.sortList[k]['id'] === id) {
+      //     this.sortList[k].isSelected = true
+      //   }
+      // }
+      let Fly = require('flyio')
+      let fly = new Fly()
+      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getCatById', {
+        goodsId: headId
+      })
+        .then((res) => {
+          const result = res.data['data']
+          this.goodsList = result
+          // this.postSorts(this.goodsList)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    loadGoods () {
+      // for (let k in this.sortList) {
+      //   this.sortList[k].isSelected = false
+      //   if (this.sortList[k]['id'] === id) {
+      //     this.sortList[k].isSelected = true
+      //   }
+      // }
+      let Fly = require('flyio')
+      let fly = new Fly()
+      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getCatById', {
+        goodsId: this.id
+      })
+        .then((res) => {
+          const result = res.data['data']
+          this.goodsList = result
+          // this.postSorts(this.goodsList)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     // 跳转detail页面传参
     bindToDetail (a) {
       this.$router.push({ path: '/pages/detail/detail', query: { cid: a } })
+    },
+    getQuery () {
+      this.id = this.$root.$mp.query['id']
+      this.loadGoods()
     }
   },
   mounted () {
@@ -42,6 +90,7 @@ export default {
     Link.$on('val', (data) => {
       vm.goodsList = data
     })
+    this.getQuery()
   }
 }
 </script>
