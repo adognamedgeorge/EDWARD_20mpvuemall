@@ -15,7 +15,7 @@
       <h4 @click="getDetail">{{ title }}</h4>
       <p class="firstP">
         <span>￥ {{ price }}</span>
-        <span class="lastSpan">奖励金: ￥ 1.00</span>
+        <span class="lastSpan">奖励金: ￥ {{ reward }}</span>
       </p>
       <p>快递费: 订单不满20元,收运费5元</p>
       <p>
@@ -33,17 +33,41 @@
         <i></i>
         <p>分享</p>
       </div>
-      <button>加入购物车</button>
-      <button>立即购买</button>
+      <button @click="showPop">加入购物车</button>
+      <button @click="addCart">立即购买</button>
+    </div>
+
+    <div class="popup" v-show="popShow">
+      <div>
+        <div class="popImg">
+          <img :src="popImg" alt="">
+        </div>
+        <div class="popPrice">
+          <h5>￥{{ price }}</h5>
+          <p>总价￥{{ price * value }}</p>
+        </div>
+      </div>
+      <div>
+        <span>购买数量</span>
+        <div class="counter">
+          <span @click="cut">-</span>
+          <input disabled type="number" :value="value"/>
+          <span class="second" @click="add">+</span>
+        </div>
+      </div>
+      <button @click="addCart">确定</button>
     </div>
 
     <div class="fixBtn" @click="bindToCart">
+
       <button>&lsaquo;</button>
       <div>
         <button class="lastBtn iconfont">&#xe61b;</button>
         <span>{{count}}</span>
       </div>
     </div>
+
+    <div class="mask" @click="popHid" v-show="popShow"></div>
   </div>
 </template>
 
@@ -56,7 +80,11 @@ export default {
       bannerList: [],
       title: '',
       price: '',
-      cid: ''
+      reward: '',
+      cid: '',
+      popShow: false,
+      value: 1,
+      popImg: ''
     }
   },
   computed: {
@@ -73,9 +101,12 @@ export default {
       })
         .then((res) => {
           const re = res.data
+          console.log(re)
           this.bannerList = re.data['urls']
           this.title = re.data['title']
           this.price = (re['data']['price'] / 100).toFixed(2)
+          this.reward = (re['data']['reward'] / 100).toFixed(2)
+          this.popImg = re.data['urls'][0]
         })
         .catch(err => {
           console.log(err)
@@ -84,7 +115,31 @@ export default {
     // 获取category页面跳转参数
     getQuery () {
       this.cid = this.$root.$mp.query['cid']
-      console.log(this.cid)
+    },
+    showPop () {
+      this.popShow = true
+    },
+    popHid () {
+      this.popShow = false
+    },
+    cut () {
+      this.value === 1 ? this.value = 1 : this.value--
+    },
+    add () {
+      this.value++
+    },
+    addCart () {
+      let Fly = require('flyio')
+      let fly = new Fly()
+      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/addToCart', {
+        cid: this.cid
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   },
   mounted () {
@@ -172,6 +227,38 @@ export default {
         font-size: .2rem;
       }
     };
+  }
+
+  .popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: rpx(700);
+    background-color: whitesmoke;
+    z-index: 999;
+    .popImg {
+      width: rpx(200);
+      height: rpx(200);
+      border: 1px solid black;
+      img {
+        @include img(rpx(0));
+      }
+    }
+    .counter {
+      @include counter(rpx(200), rpx(50), red, rpx(50), rpx(100));
+      margin-right: rpx(20);
+    }
+    button {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+
+  .mask {
+    @include mask();
   }
 }
 </style>

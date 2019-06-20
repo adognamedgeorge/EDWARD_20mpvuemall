@@ -164,13 +164,7 @@ export default {
   position: relative;
 }
 .mask {
-  position: fixed;
-  background-color: rgba(128, 128, 128, .5);
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 99;
+  @include mask();
 }
 .userinfo {
   display: flex;

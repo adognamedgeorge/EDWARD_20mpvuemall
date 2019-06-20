@@ -8,3 +8,37 @@
   height: 100%;
   border-radius: $radius;
 }
+
+@mixin counter($w, $h, $color, $sW, $iW) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  float: right;
+  border: 1px solid lightgrey;
+  width: $w;
+  height: $h;
+  text-align: center;
+  color: $color;
+  span {
+    width: $sW;
+  }
+  span:first-child {
+    border-right: 1px solid lightgrey;
+  }
+  .second {
+    border-left: 1px solid lightgrey;
+  }
+  input {
+    width: $iW;
+  }
+}
+
+@mixin mask() {
+  position: fixed;
+  background-color: rgba(128, 128, 128, .5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}

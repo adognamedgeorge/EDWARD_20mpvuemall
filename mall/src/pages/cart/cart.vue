@@ -1,34 +1,82 @@
 <template>
-  <div id="cart">
-    <ul>
-      <li>
-        <div class="content">
-          <div class="checkbox">
-            <input type="checkbox" checked />
-            <span></span>
-          </div>
-          <div class="img">
-            <img src="https://goss2.veer.com/creative/vcg/veer/612/veer-133071017.jpg" alt="">
-          </div>
-          <div class="text">
-            <h4>绿树果黄金蜜哈密绿树果黄金蜜哈密绿树果黄金蜜哈密</h4>
-            <p>500g</p>
-            <p>￥32.00</p>
-            <div class="counter">
-              <span>-</span>
-              <input type="text" value="123" />
-              <span class="second">+</span>
+  <div id="wrap">
+    <div id="cart">
+      <ul>
+        <li v-for="(item, index) of cartList" :key="index">
+          <div class="content">
+            <div class="checkbox">
+              <input type="checkbox" :checked="item.checked" />
+              <span></span>
+            </div>
+            <div class="img">
+              <img :src="item.urls" alt="">
+            </div>
+            <div class="text">
+              <h4>{{ item.title }}</h4>
+              <p>500g</p>
+              <p>￥{{ item.price / 100 }}</p>
+              <div class="counter">
+                <span @click="cut(item)">-</span>
+                <input readonly disabled type="number" v-model="item.count" :min="item.minSoldNum" :max="item.maxStock">
+                <span class="second" @click="add(item)">+</span>
+              </div>
             </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="pay">
+      <span>应付<i>￥</i>1000.00元</span>
+      <button>去结算</button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'cart'
+  name: 'cart',
+  data () {
+    return {
+      cartList: [],
+      userId: ''
+    }
+  },
+  methods: {
+    getCart () {
+      let Flyio = require('flyio')
+      let fly = new Flyio()
+      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getCartDetailByUserId', {
+        userId: 101
+      })
+        .then((res) => {
+          let re = res.data
+          this.cartList = re.data
+          console.log(re.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 购物车减;mpvue不支持ref
+    cut (item) {
+      if (item.count <= item.minSoldNum) {
+        item.count = item.minSoldNum
+      } else {
+        item.count--
+      }
+    },
+    // 购物车加
+    add (item) {
+      if (item.count >= item.maxStock) {
+        item.count = item.maxStock
+      } else {
+        item.count++
+      }
+    }
+  },
+  mounted () {
+    this.getCart()
+  }
 }
 </script>
 
@@ -37,10 +85,12 @@ export default {
   ul {
     li {
       padding: rpx(20);
+      border-bottom: 1px solid lightgrey;
       .content {
         display: flex;
         flex-direction: row;
         height: rpx(200);
+        padding: rpx(30) 0;
         justify-content: space-around;
         align-items: center;
         .checkbox {
@@ -62,27 +112,22 @@ export default {
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+            padding-top: rpx(20);
+          }
+          p {
+            font-size: .3rem;
+          }
+          p:first-child {
+            color: lightgray;
+          }
+          p:nth-child(3) {
+            color: red;
+            margin-top: rpx(50);
           }
           .counter {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            float: right;
-            border: 1px solid black;
-            width: rpx(200);
-            height: rpx(50);
-            text-align: center;
-            span {
-              width: rpx(50);
-            }
-            span:first-child {
-              border-right: 1px solid grey;
-            }
-            .second {
-              border-left: 1px solid blue;
-            }
-            input {
-              width: rpx(100);
+            @include counter(rpx(200), rpx(50), grey, rpx(50), rpx(100));
+            .noAllow {
+              cursor: no-drop;
             }
           }
         }

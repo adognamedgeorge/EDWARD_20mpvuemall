@@ -77,8 +77,8 @@ export default {
         })
     },
     // 跳转detail页面传参
-    bindToDetail (a) {
-      this.$router.push({ path: '/pages/detail/detail', query: { cid: a } })
+    bindToDetail (detailCid) {
+      this.$router.push({ path: '/pages/detail/detail', query: { cid: detailCid } })
     },
     getQuery () {
       this.id = this.$root.$mp.query['id']
