@@ -7,6 +7,32 @@
 <body>
   <div id="prime">prime</div>
 <script>
+  // for in 与 for of
+  const arr1 = ['a', 'b', 'c'];
+  for (let i in arr1) {
+    console.log(i) // 0, 1, 2
+  }
+  const arr2 = ['a', 'b', 'c'];
+  for (let i of arr2) {
+    console.log(i) // a, b, c
+  }
+  const arr3 = ['a', 'b'];
+  arr3.name = 'c';
+  for (let i in arr3) {
+    console.log(i) // 0, 1, name
+  }
+  const json = {"a": 1, "b": 2, "c": 3};
+  for (let i in json) {
+    console.log(i) // a, b, c
+  }
+  // for (let i of json) {
+  //   console.log(i)
+  // }
+  const obj = {a: 'x', b: 'y'};
+  for (let i of Object.keys(obj)) {
+    console.log(i) // a, b
+  }
+
   function A (a) {
     console.log(arguments)
   }

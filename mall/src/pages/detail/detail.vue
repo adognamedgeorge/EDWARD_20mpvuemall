@@ -107,6 +107,7 @@ export default {
           this.price = (re['data']['price'] / 100).toFixed(2)
           this.reward = (re['data']['reward'] / 100).toFixed(2)
           this.popImg = re.data['urls'][0]
+          this.value = re.data['minSoldNum']
         })
         .catch(err => {
           console.log(err)
