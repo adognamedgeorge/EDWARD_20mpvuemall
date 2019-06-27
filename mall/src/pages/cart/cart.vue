@@ -2,7 +2,7 @@
   <div id="wrap">
     <div id="cart">
       <ul>
-        <li v-for="(item, index) of cartList" :key="index">
+        <li v-for="(item, index) of car" :key="index">
           <div class="content">
             <div class="checkbox">
               <input type="checkbox" :checked="item.checked" />
@@ -26,19 +26,25 @@
       </ul>
     </div>
     <div class="pay">
-      <span>应付<i>￥</i>1000.00元</span>
+      <span>应付<i>￥</i>{{money}}</span>
       <button>去结算</button>
     </div>
   </div>
 </template>
 
 <script>
+import store from '../../vuex/store'
 export default {
   name: 'cart',
   data () {
     return {
       cartList: [],
       userId: ''
+    }
+  },
+  computed: {
+    car () {
+      return store.state.car
     }
   },
   methods: {
