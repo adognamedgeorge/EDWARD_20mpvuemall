@@ -73,6 +73,7 @@
 
 <script>
 import store from '../counter/store'
+import store2 from '../../vuex/store'
 export default {
   name: 'detail',
   data () {
@@ -84,7 +85,8 @@ export default {
       cid: '',
       popShow: false,
       value: 1,
-      popImg: ''
+      popImg: '',
+      good: {}
     }
   },
   computed: {
@@ -136,11 +138,19 @@ export default {
         cid: this.cid
       })
         .then((res) => {
-          console.log(res)
+          const re = res.data
+          const datas = re.data
+          this.good = datas
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+    addTocart () {
+      let idExist = store2.state.cartList.find((item) => {
+        return item.cid = cid
+      })
+      store2.commit('addTocart')
     }
   },
   mounted () {

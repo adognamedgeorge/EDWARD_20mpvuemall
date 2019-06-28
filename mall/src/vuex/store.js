@@ -3,44 +3,27 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const state = {
-  // car () {
-  //   let Flyio = require('flyio')
-  //   let fly = new Flyio()
-  //   fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getCartDetailByUserId', {
-  //     userId: 101
-  //   })
-  //     .then((res) => {
-  //       let re = res.data
-  //       let car = re.data
-  //       return car
-  //     })
-  // }
-  car: [
-    {
-      cid: 1001,
-      title: '1001',
-      price: 1001
+const store2 = new Vuex.Store({
+  state: {
+    carList: []
+  },
+  mutations: {
+    addCar: (state) => {
+      let Flyio = require('flyio')
+      let fly = new Flyio()
+      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getCartDetailByUserId', {
+        userId: 101
+      })
+        .then((res) => {
+          let re = res.data
+          const obj = state
+          obj.carList = re.data
+        })
     },
-    {
-      cid: 2002,
-      title: '2002',
-      price: 2002
+    addTocart: (state, good) => {
+      state.carList.push(good)
     }
-  ]
-}
-const getters = {
-  money (state) {
-    let money = 0
-    state.car.forEach(item => {
-      money += item.price
-    })
-    return money
   }
-}
-const store = new Vuex.Store({
-  state,
-  getters
 })
 
-export default store
+export default store2

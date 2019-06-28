@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import store from '../../vuex/store'
+import store2 from '../../vuex/store'
 export default {
   name: 'cart',
   data () {
@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     car () {
-      return store.state.car
+      return store2.state.carList
     }
   },
   methods: {
@@ -78,10 +78,14 @@ export default {
       } else {
         item.count++
       }
+    },
+    addCar () {
+      store2.commit('addCar')
     }
   },
   mounted () {
     this.getCart()
+    this.addCar()
   }
 }
 </script>
