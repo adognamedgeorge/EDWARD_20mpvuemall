@@ -14,7 +14,7 @@
       <div class="iconRt" @click="bindToCart">
         <i class="iconfont">&#xe61b;</i>
         <p>购物车</p>
-        <span>{{count}}</span>
+        <span>{{len}}</span>
       </div>
     </div>
   </div>
@@ -23,6 +23,7 @@
 <script>
 import homeHead from './head'
 import store from '@/pages/counter/store'
+import store2 from '@/vuex/store'
 export default {
   name: 'homeSearch',
   components: {
@@ -38,6 +39,9 @@ export default {
       } else {
         return num
       }
+    },
+    len () {
+      return store2.getters.goodsLen
     }
   },
   data () {

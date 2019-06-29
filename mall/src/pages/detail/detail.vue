@@ -55,7 +55,7 @@
           <span class="second" @click="add">+</span>
         </div>
       </div>
-      <button @click="addCart">确定</button>
+      <button @click="addTocart">确定</button>
     </div>
 
     <div class="fixBtn" @click="bindToCart">
@@ -148,9 +148,16 @@ export default {
     },
     addTocart () {
       let idExist = store2.state.cartList.find((item) => {
-        return item.cid = cid
+        if (item.cid === this.cid) {
+          return true
+        }
       })
-      store2.commit('addTocart')
+      if (!idExist) {
+        this.addCart()
+        store2.commit('addTocart', this.good)
+      }
+      this.addCart()
+      store2.commit('addTocart', this.good)
     }
   },
   mounted () {

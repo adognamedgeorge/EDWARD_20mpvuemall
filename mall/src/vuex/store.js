@@ -11,7 +11,7 @@ const store2 = new Vuex.Store({
     addCar: (state) => {
       let Flyio = require('flyio')
       let fly = new Flyio()
-      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getCartDetailByUserId', {
+      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/addToCart', {
         userId: 101
       })
         .then((res) => {
@@ -22,6 +22,11 @@ const store2 = new Vuex.Store({
     },
     addTocart: (state, good) => {
       state.carList.push(good)
+    }
+  },
+  getters: {
+    goodsLen: (state) => {
+      return state.carList.length
     }
   }
 })
