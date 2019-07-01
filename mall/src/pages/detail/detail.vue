@@ -63,7 +63,7 @@
       <button>&lsaquo;</button>
       <div>
         <button class="lastBtn iconfont">&#xe61b;</button>
-        <span>{{count}}</span>
+        <span>{{len}}</span>
       </div>
     </div>
 
@@ -86,12 +86,15 @@ export default {
       popShow: false,
       value: 1,
       popImg: '',
-      good: {}
+      goods: {}
     }
   },
   computed: {
     count () {
       return store.state.count
+    },
+    len () {
+      return store2.getters.goodsLen
     }
   },
   methods: {
@@ -103,7 +106,6 @@ export default {
       })
         .then((res) => {
           const re = res.data
-          console.log(re)
           this.bannerList = re.data['urls']
           this.title = re.data['title']
           this.price = (re['data']['price'] / 100).toFixed(2)
@@ -140,24 +142,25 @@ export default {
         .then((res) => {
           const re = res.data
           const datas = re.data
-          this.good = datas
+          this.goods = datas
+          console.log(this.goods)
         })
         .catch((err) => {
           console.log(err)
         })
     },
     addTocart () {
-      let idExist = store2.state.cartList.find((item) => {
-        if (item.cid === this.cid) {
-          return true
-        }
-      })
-      if (!idExist) {
-        this.addCart()
-        store2.commit('addTocart', this.good)
-      }
+      // let idExist = store2.state.cartList.findIndex(function (item) {
+      //   return item.cid === this.cid
+      // })
+      // if (idExist === -1) {
+      //   this.addCart()
+      //   store2.commit('addTocart', this.goods)
+      // } else {
+      //   console.log('fuck you')
+      // }
       this.addCart()
-      store2.commit('addTocart', this.good)
+      store2.commit('addTocart', this.goods)
     }
   },
   mounted () {

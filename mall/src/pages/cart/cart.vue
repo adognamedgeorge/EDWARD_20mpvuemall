@@ -44,25 +44,25 @@ export default {
   },
   computed: {
     car () {
-      return store2.state.carList
+      return store2.getters.goodsList
     }
   },
   methods: {
-    getCart () {
-      let Flyio = require('flyio')
-      let fly = new Flyio()
-      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getCartDetailByUserId', {
-        userId: 101
-      })
-        .then((res) => {
-          let re = res.data
-          this.cartList = re.data
-          console.log(re.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
+    // getCart () {
+    //   let Flyio = require('flyio')
+    //   let fly = new Flyio()
+    //   fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getCartDetailByUserId', {
+    //     userId: 101
+    //   })
+    //     .then((res) => {
+    //       let re = res.data
+    //       this.cartList = re.data
+    //       console.log(re.data)
+    //     })
+    //     .catch(err => {
+    //       console.log(err)
+    //     })
+    // },
     // 购物车减;mpvue不支持ref
     cut (item) {
       if (item.count <= item.minSoldNum) {
@@ -78,14 +78,7 @@ export default {
       } else {
         item.count++
       }
-    },
-    addCar () {
-      store2.commit('addCar')
     }
-  },
-  mounted () {
-    this.getCart()
-    this.addCar()
   }
 }
 </script>
