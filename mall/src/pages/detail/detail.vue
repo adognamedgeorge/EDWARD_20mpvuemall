@@ -22,6 +22,10 @@
         客服热线:
         <span>0571-86908200</span>
       </p>
+      <div v-for="(item, index) of goodsList" :key="index">
+        <p>{{item.price}}</p>
+        <p>{{item.title}}</p>
+      </div>
     </div>
 
     <div class="tabBtn">
@@ -55,11 +59,10 @@
           <span class="second" @click="add">+</span>
         </div>
       </div>
-      <button @click="addTocart">确定</button>
+      <button @click="addtoCart">确定</button>
     </div>
 
     <div class="fixBtn" @click="bindToCart">
-
       <button>&lsaquo;</button>
       <div>
         <button class="lastBtn iconfont">&#xe61b;</button>
@@ -95,6 +98,9 @@ export default {
     },
     len () {
       return store2.getters.goodsLen
+    },
+    goodsList () {
+      return store2.state.carList
     }
   },
   methods: {
@@ -110,7 +116,7 @@ export default {
           this.title = re.data['title']
           this.price = (re['data']['price'] / 100).toFixed(2)
           this.reward = (re['data']['reward'] / 100).toFixed(2)
-          this.popImg = re.data['urls'][0]
+          // this.popImg = re.data['urls'][0]
           this.value = re.data['minSoldNum']
         })
         .catch(err => {
@@ -149,10 +155,11 @@ export default {
           console.log(err)
         })
     },
-    addTocart () {
-      // let idExist = store2.state.cartList.findIndex(function (item) {
+    addtoCart () {
+      // let currentIndex = (item) => {
       //   return item.cid === this.cid
-      // })
+      // }
+      // let idExist = store2.state.cartList.findIndex(currentIndex)
       // if (idExist === -1) {
       //   this.addCart()
       //   store2.commit('addTocart', this.goods)

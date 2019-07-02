@@ -27,9 +27,6 @@ const store2 = new Vuex.Store({
   getters: {
     goodsLen: (state) => {
       return state.carList.length
-    },
-    goodsList: (state) => {
-      return state.carList
     }
   }
 })

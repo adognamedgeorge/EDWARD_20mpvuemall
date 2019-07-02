@@ -2,7 +2,7 @@
   <div id="wrap">
     <div id="cart">
       <ul>
-        <li v-for="(item, index) of car" :key="index">
+        <li v-for="(item, index) of goodsList" :key="index">
           <div class="content">
             <div class="checkbox">
               <input type="checkbox" :checked="item.checked" />
@@ -43,8 +43,8 @@ export default {
     }
   },
   computed: {
-    car () {
-      return store2.getters.goodsList
+    goodsList () {
+      return store2.state.goodsList
     }
   },
   methods: {
