@@ -62,9 +62,9 @@
       <button @click="addtoCart">确定</button>
     </div>
 
-    <div class="fixBtn" @click="bindToCart">
+    <div class="fixBtn">
       <button>&lsaquo;</button>
-      <div>
+      <div @click="bindToCart">
         <button class="lastBtn iconfont">&#xe61b;</button>
         <span>{{len}}</span>
       </div>
@@ -100,7 +100,7 @@ export default {
       return store2.getters.goodsLen
     },
     goodsList () {
-      return store2.state.carList
+      return store2.getters.goodsList
     }
   },
   methods: {
@@ -168,6 +168,9 @@ export default {
       // }
       this.addCart()
       store2.commit('addTocart', this.goods)
+    },
+    bindToCart () {
+      this.$router.push({ path: '/pages/cart/cart' })
     }
   },
   mounted () {

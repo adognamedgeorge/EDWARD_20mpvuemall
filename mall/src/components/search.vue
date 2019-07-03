@@ -52,6 +52,9 @@ export default {
   methods: {
     leftShow () {
       this.$emit('val', this.childVal)
+    },
+    bindToCart () {
+      this.$router.push({ path: '/pages/cart/cart' })
     }
   }
 }
