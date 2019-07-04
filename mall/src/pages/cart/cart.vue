@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     goodsList () {
-      return store2.state.goodsList
+      return store2.getters.goodsList
     }
   },
   methods: {

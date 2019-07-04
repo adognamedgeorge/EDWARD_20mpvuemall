@@ -166,7 +166,10 @@ export default {
       // } else {
       //   console.log('fuck you')
       // }
-      this.addCart()
+      // let data = {
+      //   title: 'ffffffk',
+      //   price: 1111111
+      // }
       store2.commit('addTocart', this.goods)
     },
     bindToCart () {
@@ -176,6 +179,7 @@ export default {
   mounted () {
     this.getDetail()
     this.getQuery()
+    this.addCart()
   }
 }
 </script>

@@ -21,12 +21,16 @@ const store2 = new Vuex.Store({
     //     })
     // },
     addTocart: (state, goods) => {
-      state.carList.push(goods)
+      const obj = state
+      obj.carList.push(goods)
     }
   },
   getters: {
     goodsLen: (state) => {
       return state.carList.length
+    },
+    goodsList: (state) => {
+      return state.carList
     }
   }
 })
