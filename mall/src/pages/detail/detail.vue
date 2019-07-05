@@ -12,7 +12,7 @@
     </div>
 
     <div class="detailText">
-      <h4 @click="getDetail">{{ title }}</h4>
+      <h4>{{ title }}</h4>
       <p class="firstP">
         <span>￥ {{ price }}</span>
         <span class="lastSpan">奖励金: ￥ {{ reward }}</span>
@@ -22,10 +22,6 @@
         客服热线:
         <span>0571-86908200</span>
       </p>
-      <div v-for="(item, index) of goodsList" :key="index">
-        <p>{{item.price}}</p>
-        <p>{{item.title}}</p>
-      </div>
     </div>
 
     <div class="tabBtn">
@@ -55,7 +51,7 @@
         <span>购买数量</span>
         <div class="counter">
           <span @click="cut">-</span>
-          <input disabled type="number" :value="value"/>
+          <input disabled type="number" v-model="value" :min="minSoldNum" :max="maxStock" />
           <span class="second" @click="add">+</span>
         </div>
       </div>
@@ -87,9 +83,11 @@ export default {
       reward: '',
       cid: '',
       popShow: false,
-      value: 1,
+      value: 0,
       popImg: '',
-      goods: {}
+      goods: {},
+      minSoldNum: 0,
+      maxStock: 0
     }
   },
   computed: {
@@ -116,8 +114,11 @@ export default {
           this.title = re.data['title']
           this.price = (re['data']['price'] / 100).toFixed(2)
           this.reward = (re['data']['reward'] / 100).toFixed(2)
-          // this.popImg = re.data['urls'][0]
-          this.value = re.data['minSoldNum']
+          this.popImg = re.data['urls'][0]
+          this.value = re.data['num']
+          this.minSoldNum = re.data['minSoldNum']
+          this.maxStock = re.data['maxStock']
+          this.goods = re.data
         })
         .catch(err => {
           console.log(err)
@@ -126,6 +127,7 @@ export default {
     // 获取category页面跳转参数
     getQuery () {
       this.cid = this.$root.$mp.query['cid']
+      this.getDetail()
     },
     showPop () {
       this.popShow = true
@@ -134,27 +136,27 @@ export default {
       this.popShow = false
     },
     cut () {
-      this.value === 1 ? this.value = 1 : this.value--
+      this.value === this.minSoldNum ? this.value = this.minSoldNum : this.value--
     },
     add () {
-      this.value++
+      this.value === this.maxStock ? this.value = this.maxStock : this.value++
     },
-    addCart () {
-      let Fly = require('flyio')
-      let fly = new Fly()
-      fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/addToCart', {
-        cid: this.cid
-      })
-        .then((res) => {
-          const re = res.data
-          const datas = re.data
-          this.goods = datas
-          console.log(this.goods)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
+    // addCart () {
+    //   let Fly = require('flyio')
+    //   let fly = new Fly()
+    //   fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/addToCart', {
+    //     cid: this.cid
+    //   })
+    //     .then((res) => {
+    //       const re = res.data
+    //       const datas = re.data
+    //       this.goods = datas
+    //       console.log(this.goods)
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // },
     addtoCart () {
       // let currentIndex = (item) => {
       //   return item.cid === this.cid
@@ -177,9 +179,8 @@ export default {
     }
   },
   mounted () {
-    this.getDetail()
     this.getQuery()
-    this.addCart()
+    // this.addCart()
   }
 }
 </script>
