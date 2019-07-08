@@ -87,7 +87,8 @@ export default {
       popImg: '',
       goods: {},
       minSoldNum: 0,
-      maxStock: 0
+      maxStock: 0,
+      cid2: ''
     }
   },
   computed: {
@@ -119,6 +120,7 @@ export default {
           this.minSoldNum = re.data['minSoldNum']
           this.maxStock = re.data['maxStock']
           this.goods = re.data
+          this.cid2 = re.data['cid']
         })
         .catch(err => {
           console.log(err)
@@ -158,21 +160,16 @@ export default {
     //     })
     // },
     addtoCart () {
-      // let currentIndex = (item) => {
-      //   return item.cid === this.cid
-      // }
-      // let idExist = store2.state.cartList.findIndex(currentIndex)
-      // if (idExist === -1) {
-      //   this.addCart()
-      //   store2.commit('addTocart', this.goods)
-      // } else {
-      //   console.log('fuck you')
-      // }
-      // let data = {
-      //   title: 'ffffffk',
-      //   price: 1111111
-      // }
-      store2.commit('addTocart', this.goods)
+      let currentIndex = (item) => {
+        return item.cid === this.cid2
+      }
+      let idExist = store2.state.carList.find(currentIndex)
+      console.log(idExist)
+      if (!idExist) {
+        store2.commit('addTocart', this.goods)
+      } else {
+        console.log('fuck')
+      }
     },
     bindToCart () {
       this.$router.push({ path: '/pages/cart/cart' })
