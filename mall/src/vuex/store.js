@@ -23,6 +23,13 @@ const store2 = new Vuex.Store({
     addTocart: (state, goods) => {
       const obj = state
       obj.carList.push(goods)
+    },
+    deleteGoods: (state, index) => {
+      state.carList.splice(index, 1)
+    },
+    updateGoods: (state, goods) => {
+      const {index, key, value} = goods
+      state.carList[index][key] = value
     }
   },
   getters: {
@@ -31,6 +38,15 @@ const store2 = new Vuex.Store({
     },
     goodsList: (state) => {
       return state.carList
+    },
+    sumMoney: state => {
+      let total = 0
+      state.carList.forEach((item) => {
+        if (item.select) {
+          total += item.price * item.num
+        }
+      })
+      return total
     }
   }
 })

@@ -56,6 +56,7 @@
         </div>
       </div>
       <button @click="addtoCart">确定</button>
+      <span v-if="addSuccess" class="addTip">+1</span>
     </div>
 
     <div class="fixBtn">
@@ -88,7 +89,8 @@ export default {
       goods: {},
       minSoldNum: 0,
       maxStock: 0,
-      cid2: ''
+      cid2: '',
+      addSuccess: false
     }
   },
   computed: {
@@ -167,6 +169,7 @@ export default {
       console.log(idExist)
       if (!idExist) {
         store2.commit('addTocart', this.goods)
+        this.addSuccess = true
       } else {
         console.log('fuck')
       }
@@ -292,6 +295,22 @@ export default {
 
   .mask {
     @include mask();
+  }
+
+  .addTip {
+    animation: move 2s forwards;
+  }
+
+  @keyframes move {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    to {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
   }
 }
 </style>

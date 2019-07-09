@@ -5,7 +5,7 @@
         <li v-for="(item, index) of goodsList" :key="index">
           <div class="content">
             <div class="checkbox">
-              <input type="checkbox" :checked="item.checked" />
+              <input type="checkbox" :checked="item.select === true" />
               <span></span>
             </div>
             <div class="img">
@@ -16,9 +16,9 @@
               <p>500g</p>
               <p>￥{{ item.price / 100 }}</p>
               <div class="counter">
-                <span @click="cut(item)">-</span>
-                <input readonly disabled type="number" v-model="item.count" :min="item.minSoldNum" :max="item.maxStock">
-                <span class="second" @click="add(item)">+</span>
+                <span @click="changeNumber(item.cid, -1)">-</span>
+                <input readonly disabled type="number" v-model="item.num" :min="item.minSoldNum" :max="item.maxStock">
+                <span class="second" @click="changeNumber(item.cid, 1)">+</span>
               </div>
             </div>
           </div>
@@ -26,7 +26,7 @@
       </ul>
     </div>
     <div class="pay">
-      <span>应付<i>￥</i>{{money}}</span>
+      <span>应付<i>￥</i>{{sum / 100}}</span>
       <button>去结算</button>
     </div>
   </div>
@@ -45,6 +45,9 @@ export default {
   computed: {
     goodsList () {
       return store2.getters.goodsList
+    },
+    sum () {
+      return store2.getters.sumMoney
     }
   },
   methods: {
@@ -78,6 +81,30 @@ export default {
       } else {
         item.count++
       }
+    },
+    findPosition (cid) {
+      return this.goodsList.findIndex(item => {
+        return item.cid === cid
+      })
+    },
+    changeNumber (cid, val) {
+      console.log(cid, val)
+      let i = this.findPosition(cid)
+      let number = this.goodsList[i].num
+      store2.commit('updateGoods', {
+        index: i,
+        key: 'num',
+        value: number + val <= 0 ? 1 : number + val
+      })
+    },
+    toggleSelect (cid) {
+      let i = this.findPosition(cid)
+      let select = this.goodsList[i].select
+      store2.commit('updateGoods', {
+        index: i,
+        key: 'select',
+        value: !select
+      })
     }
   }
 }
