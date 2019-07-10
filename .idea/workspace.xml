@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d4733372-5632-4659-aaf8-05fea1eaa437" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/mall/src/pages/cart/cart.vue" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/pages/cart/cart.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/src/pages/detail/detail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/pages/detail/detail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mall/src/vuex/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/mall/src/vuex/store.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -24,8 +22,8 @@
       <file leaf-file-name="store.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mall/src/vuex/store.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="673">
-              <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
+            <state relative-caret-position="-211">
+              <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
                 <element signature="e#145#168#0" />
@@ -37,12 +35,10 @@
       <file leaf-file-name="cart.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mall/src/pages/cart/cart.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
+            <state relative-caret-position="234">
+              <caret line="102" column="26" lean-forward="true" selection-start-line="102" selection-start-column="26" selection-end-line="102" selection-end-column="26" />
               <folding>
-                <element signature="e#1273#1288#0" />
-                <element signature="e#1761#1892#0" />
-                <element signature="e#1921#2048#0" />
+                <element signature="e#553#558#1" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -51,7 +47,7 @@
       <file leaf-file-name="detail.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mall/src/pages/detail/detail.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1664">
+            <state relative-caret-position="2288">
               <caret line="178" column="5" selection-start-line="178" selection-start-column="5" selection-end-line="178" selection-end-column="5" />
               <folding>
                 <element signature="e#3276#3309#0" />
@@ -125,6 +121,7 @@
       <find>count</find>
       <find>goodsList</find>
       <find>getDetail</find>
+      <find>commit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -355,12 +352,12 @@
       <workItem from="1560218180024" duration="147843000" />
       <workItem from="1561950050656" duration="63969000" />
       <workItem from="1562219152885" duration="33259000" />
-      <workItem from="1562473210833" duration="37852000" />
+      <workItem from="1562473210833" duration="47351000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="531907000" />
+    <option name="totallyTimeSpent" value="541406000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -739,7 +736,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mall/src/pages/detail/detail.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1664">
+        <state relative-caret-position="2288">
           <caret line="178" column="5" selection-start-line="178" selection-start-column="5" selection-end-line="178" selection-end-column="5" />
           <folding>
             <element signature="e#3276#3309#0" />
@@ -753,8 +750,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mall/src/vuex/store.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="673">
-          <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
+        <state relative-caret-position="-211">
+          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
             <element signature="e#145#168#0" />
@@ -764,12 +761,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mall/src/pages/cart/cart.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
+        <state relative-caret-position="234">
+          <caret line="102" column="26" lean-forward="true" selection-start-line="102" selection-start-column="26" selection-end-line="102" selection-end-column="26" />
           <folding>
-            <element signature="e#1273#1288#0" />
-            <element signature="e#1761#1892#0" />
-            <element signature="e#1921#2048#0" />
+            <element signature="e#553#558#1" expanded="true" />
           </folding>
         </state>
       </provider>

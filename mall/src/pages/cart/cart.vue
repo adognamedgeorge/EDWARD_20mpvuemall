@@ -5,7 +5,7 @@
         <li v-for="(item, index) of goodsList" :key="index">
           <div class="content">
             <div class="checkbox">
-              <input type="checkbox" :checked="item.select === true" />
+              <input type="checkbox" :checked="item.select" @click="toggleSelect(item.cid)"/>
               <span></span>
             </div>
             <div class="img">
@@ -13,7 +13,7 @@
             </div>
             <div class="text">
               <h4>{{ item.title }}</h4>
-              <p>500g</p>
+              <p>500g<span @click="del(item.cid)">  &Chi;</span></p>
               <p>￥{{ item.price / 100 }}</p>
               <div class="counter">
                 <span @click="changeNumber(item.cid, -1)">-</span>
@@ -34,6 +34,7 @@
 
 <script>
 import store2 from '../../vuex/store'
+// import { mapMutations, mapGetters } from 'vuex'
 export default {
   name: 'cart',
   data () {
@@ -49,39 +50,12 @@ export default {
     sum () {
       return store2.getters.sumMoney
     }
+    // ...mapGetters(['goodsList', 'sum'])
   },
   methods: {
-    // getCart () {
-    //   let Flyio = require('flyio')
-    //   let fly = new Flyio()
-    //   fly.post('https://easy-mock.com/mock/5ca466b55eeed03805bf4949/edward/getCartDetailByUserId', {
-    //     userId: 101
-    //   })
-    //     .then((res) => {
-    //       let re = res.data
-    //       this.cartList = re.data
-    //       console.log(re.data)
-    //     })
-    //     .catch(err => {
-    //       console.log(err)
-    //     })
-    // },
-    // 购物车减;mpvue不支持ref
-    cut (item) {
-      if (item.count <= item.minSoldNum) {
-        item.count = item.minSoldNum
-      } else {
-        item.count--
-      }
-    },
-    // 购物车加
-    add (item) {
-      if (item.count >= item.maxStock) {
-        item.count = item.maxStock
-      } else {
-        item.count++
-      }
-    },
+    // ...mapMutations([
+    //   'deleteGoods', 'updateGoods'
+    // ]),
     findPosition (cid) {
       return this.goodsList.findIndex(item => {
         return item.cid === cid
@@ -96,15 +70,31 @@ export default {
         key: 'num',
         value: number + val <= 0 ? 1 : number + val
       })
+      // this.updateGoods({
+      //   index: i,
+      //   key: 'num',
+      //   value: number + val <= 0 ? 1 : number + val
+      // })
     },
     toggleSelect (cid) {
       let i = this.findPosition(cid)
       let select = this.goodsList[i].select
+      console.log(select)
       store2.commit('updateGoods', {
         index: i,
         key: 'select',
         value: !select
       })
+      // this.updateGoods({
+      //   index: i,
+      //   key: 'select',
+      //   value: !select
+      // })
+    },
+    del (cid) {
+      let i = this.findPosition(cid)
+      store2.commit('deleteGoods', i)
+      // this.deleteGoods(i)
     }
   }
 }
