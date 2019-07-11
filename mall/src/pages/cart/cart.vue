@@ -121,8 +121,7 @@ export default {
           width: 25%;
           height: rpx(170);
           img {
-            width: 100%;
-            height: 100%;
+            @include img(rpx(0));
           }
         }
         .text {

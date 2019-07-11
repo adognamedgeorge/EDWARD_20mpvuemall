@@ -73,13 +73,17 @@ export default {
       posterList: [],
       catList: [],
       newCat: [],
-      secCat: []
+      secCat: [],
+      bindToCart: 'this is a string'
     }
   },
   computed: {
     count () {
       return store.state.count
     }
+  },
+  beforeCreate () {
+    console.log(this.$bindToCart)
   },
   components: {
     card,
@@ -137,6 +141,7 @@ export default {
   },
 
   created () {
+    console.log(this.bindToCart)
     // let app = getApp()
   }
 }
@@ -173,9 +178,9 @@ export default {
 }
 
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
+  width: rpx(128);
+  height: rpx(128);
+  margin: rpx(20);
   border-radius: 50%;
 }
 

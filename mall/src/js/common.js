@@ -1,6 +1,6 @@
 exports.install = function (Vue, options) {
-  Vue.prototype.bindToCart = () => {
-    const url = '../cart/cart'
+  Vue.prototype.$bindCart = () => {
+    const url = 'pages/cart/cart'
     if (mpvuePlatform === 'wx') {
       mpvue.switchTab({ url })
     } else {
